@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class WinMessage extends Component {
+class WinMessage extends Component{
 	render() {
 		console.log(this.props.stats);
 		return(
@@ -10,7 +10,7 @@ class WinMessage extends Component {
 				<button onClick={(i) => this.props.onClick()}>Reset</button>
 			</div>
 		)
-	}
+	} 
 }
 
 export default WinMessage;
