@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class WinMessage extends Component{
+class WinMessage extends Component {
 	render() {
 		console.log(this.props.stats);
 		return(

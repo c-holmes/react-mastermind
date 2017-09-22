@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PegPicker from './Pegpicker';
 // import WinMessage from './WinMessage';
 require('./styles/style.scss');
 
@@ -6,27 +7,59 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
- 
+      winner: false,
+      feedback: false,
+      turn: 0,
+      cmArr: this.generateCode(1, 6, 4)
     } 
   } 
+
+  generateCode(min, max, size) {
+    let code = [];
+    for(let i = 0; i < size; i++){
+      code.push(Math.floor(Math.random()*(max-min+1)+min));      
+    }
+    return code;
+  }
   
   render() {
-    const cmArr = [3, 2, 1, 1];
-    const cbArr = [2, 2, 2, 3];
-    this.checkCodePattern(cmArr, cbArr, 1);
-    
     return (
       <div className="App">
-
+        <PegPicker handleSubmit={(i) => this.handleSubmit(i)} />
       </div>
     );
   }
 
+  handleSubmit(event){
+    event.preventDefault();
+    const turn = this.state.turn;
+    const target = event.target;
+    const cmArr = this.state.cmArr;
+
+    //grab cb peg values
+    const cbArr = [
+      parseInt(target.peg1.value), 
+      parseInt(target.peg2.value), 
+      parseInt(target.peg3.value), 
+      parseInt(target.peg4.value)
+    ];
+
+    this.checkCodePattern(cmArr, cbArr, turn);
+  }
+
   checkCodePattern(cmArr, cbArr, turn) {
     const winner = this.isGameFinished(cmArr, cbArr); 
+    let feedback = this.giveFeedBack(cmArr, cbArr);
 
     if (!winner) {
-      this.giveFeedBack(cmArr, cbArr); 
+      console.log(feedback);
+      this.setState({
+        feedback: feedback,
+      })
+    } else {
+      this.setState({
+        winner: true,
+      })
     }
   } 
 
@@ -70,7 +103,7 @@ class App extends Component {
       }
     });
 
-    console.log(fbArr);
+    return fbArr;
   }
 }
 
