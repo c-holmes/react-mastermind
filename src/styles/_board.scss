@@ -1,0 +1,31 @@
+$border-color: #ddd;
+
+.board{
+	padding: 20px;
+	display: inline-block;
+	text-align: left;
+
+	.turns{
+		display: table;
+
+		.turn{
+			display: table-row;
+
+			.turnNum, .code, .feedback{
+				display: table-cell;
+				padding: 15px;
+				border-bottom: 1px solid $border-color;
+			}
+
+			&.active{
+				.turnNum, .code, .feedback{
+					border-bottom: 0px;
+				}
+			}
+
+			.turnNum, .code{
+				border-right: 1px solid $border-color;
+			}
+		}
+	}
+}

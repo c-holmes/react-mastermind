@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PegPicker from './Pegpicker';
+import Board from './Board';
 // import WinMessage from './WinMessage';
 require('./styles/style.scss');
 
@@ -8,9 +8,10 @@ class App extends Component {
     super();
     this.state = {
       winner: false,
-      feedback: false,
+      feedback: [],
       turn: 0,
-      cmArr: this.generateCode(1, 6, 4)
+      cmArr: this.generateCode(1, 6, 4),
+      turnHistory: []
     } 
   } 
 
@@ -25,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <PegPicker handleSubmit={(i) => this.handleSubmit(i)} />
+        <Board handleSubmit={(i) => this.handleSubmit(i)} feedback={this.state.feedback} turn={this.state.turn} turnHistory={this.state.turnHistory} />
       </div>
     );
   }
@@ -50,11 +51,20 @@ class App extends Component {
   checkCodePattern(cmArr, cbArr, turn) {
     const winner = this.isGameFinished(cmArr, cbArr); 
     let feedback = this.giveFeedBack(cmArr, cbArr);
+    let currTurn = turn + 1;
+    let turnHistory = this.state.turnHistory.slice();
+
+    // save old turns & their feed back to state
+    turnHistory.push({
+      cbArr: cbArr,
+      feedback: feedback,
+    });
 
     if (!winner) {
-      console.log(feedback);
       this.setState({
         feedback: feedback,
+        turn: currTurn,
+        turnHistory: turnHistory
       })
     } else {
       this.setState({
