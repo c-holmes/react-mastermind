@@ -1,0 +1,116 @@
+$color0:#f7f7f7;
+$color1:#4ECDC4;
+$color2:#B4FF8C;
+$color3:#FF6B6B;
+$color4:#FFE66D;
+$color5:#BF93BD;
+$color6:#1A535C;
+
+.code{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 0;
+
+	.peg{
+		width: 25px;
+    height: 25px;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0 25px;
+		position: relative;
+
+		.right,.left{
+			position: absolute;
+			background: transparent;
+			padding: 0;
+			top: 3px;
+			width: 0;
+			height: 0;
+			border-top: 7px solid transparent;
+			border-bottom: 7px solid transparent;
+			cursor: pointer;
+			z-index: 999;
+			outline: none;
+		}
+
+		.right{
+			right: -15px;
+			border-left: 7px solid #ddd;
+			border-right: none;
+
+			&:hover{
+				border-left: 7px solid #000;
+			}
+		}
+
+		.left{
+			left: -15px;
+			border-right: 7px solid #ddd;
+			border-left: none;
+
+			&:hover{
+				border-right: 7px solid #000;
+			}
+		}
+
+    &.peg-0{
+    	background: $color0;
+    	border: 2px solid darken($color0, 5%);
+    }
+		&.peg-1{
+			background: $color1;
+			border: 2px solid darken($color1, 5%);
+		}
+		&.peg-2{
+			background: $color2;
+			border: 2px solid darken($color2, 5%);
+		}
+		&.peg-3{
+			background: $color3;
+			border: 2px solid darken($color3, 5%);
+		}
+		&.peg-4{
+			background: $color4;
+			border: 2px solid darken($color4, 5%);
+		}
+		&.peg-5{
+			background: $color5;
+			border: 2px solid darken($color5, 5%);
+		}
+		&.peg-6{
+			background: $color6;
+			border: 2px solid darken($color6, 5%);
+		}
+	}
+}
+
+.feedback{
+	font-size: 0;
+	padding: 0;
+
+	.peg{		
+		width: 35%;
+    display: inline-block;
+    text-align: center;
+    padding: 3px 0;
+
+    span{
+			width: 12px;
+			height: 12px;
+			box-sizing: border-box;
+			display: inline-block;
+			border-radius: 50%;
+			padding: 2px;
+    }
+
+		&.peg-1 span{
+			background: #fff;
+			border: 2px solid #000;
+		}
+		&.peg-2 span{
+			background: #000;
+			border: 2px solid #000;
+		}
+	}
+}

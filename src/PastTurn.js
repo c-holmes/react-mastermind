@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class PastTurn extends Component {
-	renderArray(key) {
+	renderArray(key, index) {
 		return(
-			<span className={"value-" + key}>{key}</span>
+			<span key={index} className={"peg peg-" + key}><span></span></span>
 		)
 	}
 
 	render() {
 		return(
 			<div className="turn past">
-				<div className="turnNum">{this.props.key + 1}</div>
+				<div className="turnNum">{this.props.turnNum + 1}</div>
 				<div className="code">
 					{this.props.cbArr.map(this.renderArray)}
 				</div>

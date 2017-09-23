@@ -13,13 +13,21 @@ $border-color: #ddd;
 
 			.turnNum, .code, .feedback{
 				display: table-cell;
-				padding: 15px;
+				vertical-align: middle;
+				padding-left: 15px;
+				padding-right: 15px;
 				border-bottom: 1px solid $border-color;
 			}
 
 			&.active{
 				.turnNum, .code, .feedback{
 					border-bottom: 0px;
+				}
+
+				form{
+					.hidden{
+						display: none;
+					}
 				}
 			}
 

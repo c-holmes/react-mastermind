@@ -5,7 +5,7 @@ import PastTurn from './PastTurn';
 
 class Board extends Component {
 	renderPastTurns(key, index) {
-		return <PastTurn key={index} feedback={key.feedback} cbArr={key.cbArr} />
+		return <PastTurn key={index} turnNum={index} feedback={key.feedback} cbArr={key.cbArr} />
 	}
 
 	render() {

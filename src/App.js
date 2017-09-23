@@ -74,13 +74,16 @@ class App extends Component {
   } 
 
   isGameFinished(cmArr, cbArr) {
-    if (cbArr === cmArr) {
-      console.log('winner');
-      return true;
-    } else {
-      console.log('no winner');
-      return false;
+    console.log(cmArr, cbArr);
+    for (let i = 0; i < cmArr.length; i++ ){
+      if (cmArr[i] !== cbArr[i]) {
+        console.log('no winner');
+        return false
+      }
     }
+
+    console.log('winner');
+    return true;
   }
 
   giveFeedBack(cmArr, cbArr) {
@@ -112,6 +115,8 @@ class App extends Component {
         }
       }
     });
+
+    console.log(fbArr);
 
     return fbArr;
   }
