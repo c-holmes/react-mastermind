@@ -14,7 +14,7 @@ class Board extends Component {
 				<div className="answer"></div>
 				<div className="turns">
 						{this.props.turnHistory.map(this.renderPastTurns)}
-						<PegPicker turnNum={this.props.turn} handleSubmit={(i) => this.props.handleSubmit(i)} />
+						<PegPicker cbArr={this.props.cbArr} turnNum={this.props.turn} handleSubmit={(i) => this.props.handleSubmit(i)} handleClick={(a,b,c) => this.props.handleClick(a,b,c)} />
 				</div>
 			</div>
 		)

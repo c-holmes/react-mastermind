@@ -8,5 +8,34 @@ body {
   margin: 30px auto;
   text-align: center;
   max-width: 600px;
+
+  .popup{
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,.5);
+    padding: 40px;
+    max-width: 250px;
+    margin: 0 auto;
+    box-shadow: 5px 6px 20px rgba(0,0,0,.5);
+
+    h3{
+      font-weight: 400;
+    }
+
+    button{
+      font-size: 14px;
+      padding: 7px 15px;
+      color: #000;
+      background: #f7f7f7;
+      border-radius: 0px;
+      border: 1px solid darken(#f7f7f7, 20%);
+      cursor: pointer;
+    }
+  }
 }
+
 

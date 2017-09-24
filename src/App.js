@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board';
-// import WinMessage from './WinMessage';
+import WinMessage from './WinMessage';
 require('./styles/style.scss');
 
 class App extends Component {
@@ -11,7 +11,9 @@ class App extends Component {
       feedback: [],
       turn: 0,
       cmArr: this.generateCode(1, 6, 4),
-      turnHistory: []
+      cbArr: [0,0,0,0],
+      turnHistory: [],
+      gameNum: 0,
     } 
   } 
 
@@ -24,9 +26,14 @@ class App extends Component {
   }
   
   render() {
+    let winMessage;
+    if (this.state.winner) {
+      winMessage = <WinMessage turn={this.state.turn} onClick={(i)=>{this.handleReset(i)}} />
+    }
     return (
       <div className="App">
-        <Board handleSubmit={(i) => this.handleSubmit(i)} feedback={this.state.feedback} turn={this.state.turn} turnHistory={this.state.turnHistory} />
+        <Board feedback={this.state.feedback} cbArr={this.state.cbArr} turn={this.state.turn} turnHistory={this.state.turnHistory} handleClick={(a,b,c) => {this.handleClick(a,b,c)}} handleSubmit={(i) => this.handleSubmit(i)} />
+        {winMessage}
       </div>
     );
   }
@@ -46,6 +53,39 @@ class App extends Component {
     ];
 
     this.checkCodePattern(cmArr, cbArr, turn);
+  }
+
+  handleClick(direction, index, value) {
+    const cbArr = this.state.cbArr.slice();
+
+    if( direction === 'right' && value === 6) {
+      value = 1;
+    } else if( direction === 'right' ) {
+      value = value + 1;
+    } else if( direction === 'left' && value === 1 || direction === 'left' && value === 0 ) {
+      value = 6;
+    } else if( direction === 'left' ) {
+      value = value - 1;
+    }
+
+    cbArr[index] = value;
+
+    this.setState({
+      cbArr: cbArr
+    });
+  }
+
+  handleReset() {
+    const currGameNum = this.state.gameNum + 1;
+    this.setState({
+      winner: false,
+      feedback: [],
+      turn: 0,
+      cmArr: this.generateCode(1, 6, 4),
+      cbArr: [0,0,0,0],
+      turnHistory: [],
+      gameNum: currGameNum
+    })
   }
 
   checkCodePattern(cmArr, cbArr, turn) {
@@ -77,19 +117,17 @@ class App extends Component {
     console.log(cmArr, cbArr);
     for (let i = 0; i < cmArr.length; i++ ){
       if (cmArr[i] !== cbArr[i]) {
-        console.log('no winner');
         return false
       }
     }
 
-    console.log('winner');
     return true;
   }
 
   giveFeedBack(cmArr, cbArr) {
     let fbArr = [];
     let cmLeftovers = cmArr.slice();
-    let cbLeftovers = cbArr.slice();
+    let cbLeftovers = cbArr.slice();    
 
     // check if any pegs are in right spot and right value
     cbArr.map((value, i) => {
@@ -107,16 +145,17 @@ class App extends Component {
     let cmCleanLeftovers = cmLeftovers.filter( x => x );
     let cbCleanLeftovers = cbLeftovers.filter( x => x );
 
-    // check for right value wrong spot
+    // check for right value wrong spot, remove after match
     cbCleanLeftovers.map((value, i) => {
+      let index = 0;
       for (let cmIndexVal of cmCleanLeftovers) {
         if (value === cmIndexVal) {
           fbArr.push(1);
+          cmCleanLeftovers.splice(index, 1);
         }
+        index++;
       }
     });
-
-    console.log(fbArr);
 
     return fbArr;
   }
