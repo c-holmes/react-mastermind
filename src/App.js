@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import WinMessage from './WinMessage';
+import AdminBar from './AdminBar';
 require('./styles/style.scss');
+
+// TODO
+// add a sticky total tally bar
+// optional: add point counter
+// The codemaker gets one point for each guess a codebreaker makes. An extra point is earned by the codemaker if the codebreaker doesn't guess the pattern exactly in the last guess.
+// add different modes 8, 10, 12 turns allowed
+// add random animation at start & hide codemaker
+// add a start menu & router
 
 class App extends Component {
   constructor() {
@@ -10,10 +19,15 @@ class App extends Component {
       winner: false,
       feedback: [],
       turn: 0,
+      maxTurns: 7,
       cmArr: this.generateCode(1, 6, 4),
       cbArr: [0,0,0,0],
       turnHistory: [],
       gameNum: 0,
+      score: {
+        player1: 0,
+        player2: 0,
+      }
     } 
   } 
 
@@ -32,6 +46,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <AdminBar gameNum={this.state.gameNum} score={this.state.score} maxTurns={this.state.maxTurns} turn={this.state.turn} />
         <Board feedback={this.state.feedback} cbArr={this.state.cbArr} turn={this.state.turn} turnHistory={this.state.turnHistory} handleClick={(a,b,c) => {this.handleClick(a,b,c)}} handleSubmit={(i) => this.handleSubmit(i)} />
         {winMessage}
       </div>
@@ -41,6 +56,7 @@ class App extends Component {
   handleSubmit(event){
     event.preventDefault();
     const turn = this.state.turn;
+    const maxTurns = this.state.maxTurns;
     const target = event.target;
     const cmArr = this.state.cmArr;
 
@@ -52,7 +68,7 @@ class App extends Component {
       parseInt(target.peg4.value)
     ];
 
-    this.checkCodePattern(cmArr, cbArr, turn);
+    this.checkCodePattern(cmArr, cbArr, maxTurns, turn);
   }
 
   handleClick(direction, index, value) {
@@ -88,8 +104,8 @@ class App extends Component {
     })
   }
 
-  checkCodePattern(cmArr, cbArr, turn) {
-    const winner = this.isGameFinished(cmArr, cbArr); 
+  checkCodePattern(cmArr, cbArr, maxTurns, turn) {
+    const winner = this.isGameFinished(cmArr, cbArr, maxTurns, turn); 
     let feedback = this.giveFeedBack(cmArr, cbArr);
     let currTurn = turn + 1;
     let turnHistory = this.state.turnHistory.slice();
@@ -113,14 +129,31 @@ class App extends Component {
     }
   } 
 
-  isGameFinished(cmArr, cbArr) {
-    console.log(cmArr, cbArr);
+  isGameFinished(cmArr, cbArr, maxTurns, turn) {
+    console.log(cmArr, cbArr, maxTurns, turn);
+
+    if(maxTurns === turn){
+      const newScore = Object.assign({}, this.state.score);
+      newScore.player2 = newScore.player2 + 1;
+      // computer wins
+      this.setState({
+        score: newScore
+      });
+      return true;
+    }
+
     for (let i = 0; i < cmArr.length; i++ ){
       if (cmArr[i] !== cbArr[i]) {
-        return false
+        return false;
       }
     }
 
+    // player wins
+    const newScore = Object.assign({}, this.state.score);
+    newScore.player1 = newScore.player1 + 1;
+    this.setState({
+      score: newScore
+    });
     return true;
   }
 
