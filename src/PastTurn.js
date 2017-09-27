@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class PastTurn extends Component {
-	renderArray(key, index) {
+	renderCodePeg(key, index) {
 		return(
-			<span key={index} className={"peg peg-" + key}><span></span></span>
+			<div className="peg-holder">	
+				<span key={index} className={"peg peg-" + key}><span></span></span>
+			</div>
+		)
+	}
+
+	renderFeedbackPeg(key, index) {
+		return(
+				<span key={index} className={"peg peg-" + key}><span></span></span>
 		)
 	}
 
@@ -13,10 +21,10 @@ class PastTurn extends Component {
 			<div className="turn past">
 				<div className="turnNum">{this.props.turnNum + 1}</div>
 				<div className="code">
-					{this.props.cbArr.map(this.renderArray)}
+					{this.props.cbArr.map(this.renderCodePeg)}
 				</div>
 				<div className="feedback">
-					{this.props.feedback.map(this.renderArray)}
+					{this.props.feedback.map(this.renderFeedbackPeg)}
 				</div>
 			</div>
 		)

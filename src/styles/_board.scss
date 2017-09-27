@@ -1,12 +1,13 @@
 $border-color: #ddd;
 
 .board{
-	padding: 20px;
+	padding: 20px 5px;
 	display: inline-block;
 	text-align: left;
 
 	.turns{
 		display: table;
+		max-width: 600px;
 
 		.turn{
 			display: table-row;
@@ -49,6 +50,21 @@ $border-color: #ddd;
 
 			.turnNum, .code{
 				border-right: 1px solid $border-color;
+			}
+		}
+	}
+}
+
+@media all and (min-width: 767px) {
+	.board{
+		padding: 25px;
+
+		.turns{
+			.turn{
+				.turnNum, .feedback{
+					padding-left: 25px;
+					padding-right: 25px;
+				}
 			}
 		}
 	}

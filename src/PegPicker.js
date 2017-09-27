@@ -11,22 +11,30 @@ class PegPicker extends Component {
 			<div className="turn active">
 				<div className="turnNum">{this.props.turnNum + 1}</div>
 				<div className="code">
-					<span className={"peg peg-" + peg1}>
-						<button className="right" onClick={()=>{this.props.handleClick('right', 0, peg1)}}></button>
-						<button className="left" onClick={()=>{this.props.handleClick('left', 0, peg1)}}></button>
-					</span>
-					<span className={"peg peg-" + peg2}>
-						<button className="right" onClick={()=>{this.props.handleClick('right', 1, peg2)}}></button>
-						<button className="left" onClick={()=>{this.props.handleClick('left', 1, peg2)}}></button>
-					</span>
-					<span className={"peg peg-" + peg3}>
-						<button className="right" onClick={()=>{this.props.handleClick('right', 2, peg3)}}></button>
-						<button className="left" onClick={()=>{this.props.handleClick('left', 2, peg3)}}></button>
-					</span>
-					<span className={"peg peg-" + peg4}>
-						<button className="right" onClick={()=>{this.props.handleClick('right', 3, peg4)}}></button>
-						<button className="left" onClick={()=>{this.props.handleClick('left', 3, peg4)}}></button>
-					</span>
+					<div className="peg-holder">
+						<span className={"peg peg-" + peg1}>
+							<button className="right" onClick={()=>{this.props.handleClick('right', 0, peg1)}}></button>
+							<button className="left" onClick={()=>{this.props.handleClick('left', 0, peg1)}}></button>
+						</span>
+					</div>
+					<div className="peg-holder">
+						<span className={"peg peg-" + peg2}>
+							<button className="right" onClick={()=>{this.props.handleClick('right', 1, peg2)}}></button>
+							<button className="left" onClick={()=>{this.props.handleClick('left', 1, peg2)}}></button>
+						</span>
+					</div>
+					<div className="peg-holder">
+						<span className={"peg peg-" + peg3}>
+							<button className="right" onClick={()=>{this.props.handleClick('right', 2, peg3)}}></button>
+							<button className="left" onClick={()=>{this.props.handleClick('left', 2, peg3)}}></button>
+						</span>
+					</div>
+					<div className="peg-holder">
+						<span className={"peg peg-" + peg4}>
+							<button className="right" onClick={()=>{this.props.handleClick('right', 3, peg4)}}></button>
+							<button className="left" onClick={()=>{this.props.handleClick('left', 3, peg4)}}></button>
+						</span>
+					</div>
 				</div>
 				<div className="feedback">
 					<form onSubmit={this.props.handleSubmit.bind(this)}>
