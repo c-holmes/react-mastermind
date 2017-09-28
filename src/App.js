@@ -5,8 +5,6 @@ import AdminBar from './AdminBar';
 require('./styles/style.scss');
 
 // TODO
-// make mobilefirendly
-// add a sticky total tally bar
 // add different modes 8, 10, 12 turns allowed
 // add random animation at start & hide codemaker
 // add a start menu & router
@@ -41,7 +39,7 @@ class App extends Component {
   render() {
     let winMessage;
     if (this.state.winner) {
-      winMessage = <WinMessage turn={this.state.turn} maxTurns={this.state.maxTurns} onClick={(i)=>{this.handleReset(i)}} />
+      winMessage = <WinMessage turn={this.state.turn} maxTurns={this.state.maxTurns} cmArr={this.state.cmArr} onClick={(i)=>{this.handleReset(i)}} />
     }
     return (
       <div className="App">

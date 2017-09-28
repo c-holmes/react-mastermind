@@ -109,6 +109,21 @@ $color6:#1A535C;
 	}
 }
 
+.answer{
+	padding: 0 92px 20px 39px;
+	box-sizing: border-box;
+	max-width: 600px;
+
+	&.animate-finished{
+		display: none;
+	}
+
+	.code{
+		padding: 10px 15px 10px 15px;
+	}
+}
+
+
 @media all and (min-width: 480px){
 	.code{
 		.peg-holder{
@@ -186,5 +201,8 @@ $color6:#1A535C;
 				}
 			}
 		}
+	}
+	.answer{
+		padding: 0 111px 0 59px;
 	}
 }
